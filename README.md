@@ -99,7 +99,7 @@ cask "popcorn-time", args: { "no-quarantine": true }
 
 If the application cannot be opened after the upgrade, please try to clear the configuration file, which is in the `~/.chatgpt/*` directory.
 
-## Out of sync login status between multiple windows
+### Out of sync login status between multiple windows
 
 If you have already logged in in the main window, but the system tray window shows that you are not logged in, you can fix it by restarting the application (`Menu -> Preferences -> Restart ChatGPT`).
 
