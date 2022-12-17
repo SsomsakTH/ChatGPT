@@ -65,40 +65,41 @@ In the chatgpt text input area, type a character starting with `/` to bring up t
 
 ## ✨ Features
 
-- multi-platform: `macOS` `Linux` `Windows`
-- export ChatGPT history (PNG, PDF and Share Link)
-- always on top (whether the window should always be on top of other windows)
-- inject script
-- auto updater
-- app menu
-- tray window
-- shortcut
+- Multi-platform: `macOS` `Linux` `Windows`
+- Export ChatGPT history (PNG, PDF and Share Link)
+- Automatic application upgrade notification
+- Common shortcut keys
+- System tray hover window
+- Powerful menu items
 
-### Menu
+### MenuItem
 
 - **Preferences**
   - `Theme` - `Light`, `Dark` (Only macOS and Windows are supported).
-  - `Always on Top`: Window is always on top of other windows.
-  - `Titlebar`: Only supports macOS.
-  - `Inject Script`: User scripts that can modify web pages.
+  - `Stay On Top`: The window is stay on top of other windows.
+  - `Titlebar`: Whether to display the titlebar, supported by macOS only.
+  - `Hide Dock Icon` ([#35](https://github.com/lencx/ChatGPT/issues/35)): Hide application icons from the Dock(support macOS only).
+    - Right-click on the SystemTray to open the menu, then click `Show Dock Icon` in the menu item to re-display the application icon in the Dock (`SystemTrayMenu -> Show Dock Icon`).
+  - `Inject Script`: Using scripts to modify pages.
   - `Control Center`: The control center of ChatGPT application, it will give unlimited imagination to the application.
-    - `Theme`, `Always on Top`, `Titlebar`
-    - `User Agent` ([#17](https://github.com/lencx/ChatGPT/issues/17)): Customize `user agent` to prevent security detection interception. Default is empty string.
-    - `Switch Origin` ([#14](https://github.com/lencx/ChatGPT/issues/14)): Modify website address, the default is `https://chat.openai.com`. Please ensure that the mirror address is consistent with the UI of the original URL, otherwise the export function will fail.
+    - `Theme`, `Stay On Top`, `Titlebar`, ...
+    - `User Agent` ([#17](https://github.com/lencx/ChatGPT/issues/17)): Custom `user agent`, which may be required in some scenarios. The default value is the empty string.
+    - `Switch Origin` ([#14](https://github.com/lencx/ChatGPT/issues/14)): Switch the site source address, the default is `https://chat.openai.com`, please make sure the mirror site UI is the same as the original address. Otherwise, some functions may not be available.
   - `Go to Config`: Open the configuration file directory (`path: ~/.chatgpt/*`).
-  - `Clear Config`: Clear all chatgpt configuration files (`path: ~/.chatgpt/*`), dangerous operation, please backup data.
-  - `Restart ChatGPT`: After editing the injection script file, you can restart the application through this menu item to make the script take effect.
-  - `Awesome ChatGPT`: Related resources recommended.
+  - `Clear Config`: Clear the configuration file (`path: ~/.chatgpt/*`), dangerous operation, please backup the data in advance.
+  - `Restart ChatGPT`: Restart the application, for example: the program is stuck or the injection script can take effect by restarting the application after editing.
+  - `Awesome ChatGPT`: Recommended Related Resources.
 - **Edit** - `Undo`, `Redo`, `Cut`, `Copy`, `SelectAll`, ...
 - **View** - `Go Back`, `Go Forward`, `Scroll to Top of Screen`, `Scroll to Bottom of Screen`, `Refresh the Screen`, ...
 - **Help**
-  - `Update Log`: ChatGPT app changelog.
-  - `Report Bug`: Defects and Suggestions Feedback.
-  - `Toggle Developer Tools`: Developer tools for debugging web pages.
+  - `Update Log`: ChatGPT changelog.
+  - `Report Bug`: Report a bug or give feedback.
+  - `Toggle Developer Tools`: Developer debugging tools.
 
 ## TODO
 
-- web access capability ([#20](https://github.com/lencx/ChatGPT/issues/20))
+- Web access capability ([#20](https://github.com/lencx/ChatGPT/issues/20))
+- Shortcut command typing chatgpt prompt
 - ...
 
 ## 👀 Preview
@@ -115,7 +116,7 @@ In the chatgpt text input area, type a character starting with `/` to bring up t
 
 ### Can't open ChatGPT
 
-If the application cannot be opened after the upgrade, please try to clear the configuration file, which is in the `~/.chatgpt/*` directory.
+If you cannot open the application after the upgrade, please try to clear the configuration file, which is in the `~/.chatgpt/*` directory.
 
 ### Out of sync login status between multiple windows
 
@@ -160,7 +161,8 @@ yarn build
 
 ## ❤️ Thanks
 
-- The share buttons code is copied directly from [@liady](https://github.com/liady) extension with minor modifications.
+- The core implementation of the share button code was copied from the [@liady](https://github.com/liady) extension with some modifications.
+- Thanks to the [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts) repository for inspiring the custom command function for this application.
 
 ---
 
