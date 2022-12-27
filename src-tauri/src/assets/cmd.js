@@ -55,7 +55,7 @@ function init() {
     height: 20px;
   }
   .chatappico.pdf {
-    width: 24px;
+    width: 2px;
     height: 24px;
   }
   `;
