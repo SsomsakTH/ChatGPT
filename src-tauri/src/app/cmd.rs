@@ -1,21 +1,14 @@
 use crate::{
-    app::window,
     conf::{ChatConfJson, GITHUB_PROMPTS_CSV_URL},
-    utils,
+    utils::{self, exists},
 };
 use log::info;
 use std::{collections::HashMap, fs, path::PathBuf};
-use tauri::{api, command, AppHandle, Manager};
-use walkdir::WalkDir;
+use tauri::{api, command, AppHandle, Manager, Theme};
 
 #[command]
 pub fn drag_window(app: AppHandle) {
     app.get_window("core").unwrap().start_dragging().unwrap();
-}
-
-#[command]
-pub fn dalle2_window(app: AppHandle, query: String) {
-    window::dalle2_window(&app.app_handle(), query);
 }
 
 #[command]
@@ -43,6 +36,11 @@ pub fn open_link(app: AppHandle, url: String) {
 #[command]
 pub fn get_chat_conf() -> ChatConfJson {
     ChatConfJson::get_chat_conf()
+}
+
+#[command]
+pub fn get_theme() -> String {
+    ChatConfJson::theme().unwrap_or(Theme::Light).to_string()
 }
 
 #[command]
@@ -129,6 +127,9 @@ pub fn window_reload(app: AppHandle, label: &str) {
         .unwrap();
 }
 
+use utils::chat_root;
+use walkdir::WalkDir;
+
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
 pub struct ModelRecord {
     pub cmd: String,
@@ -141,7 +142,7 @@ pub struct ModelRecord {
 #[command]
 pub fn cmd_list() -> Vec<ModelRecord> {
     let mut list = vec![];
-    for entry in WalkDir::new(utils::chat_root().join("cache_model"))
+    for entry in WalkDir::new(chat_root().join("cache_model"))
         .into_iter()
         .filter_map(|e| e.ok())
     {
@@ -181,13 +182,11 @@ pub async fn sync_prompts(app: AppHandle, time: u64) -> Option<Vec<ModelRecord>>
 
         let data2 = data.clone();
 
-        let model = utils::chat_root().join("chat.model.json");
-        let model_cmd = utils::chat_root().join("chat.model.cmd.json");
-        let chatgpt_prompts = utils::chat_root()
-            .join("cache_model")
-            .join("chatgpt_prompts.json");
+        let model = chat_root().join("chat.model.json");
+        let model_cmd = chat_root().join("chat.model.cmd.json");
+        let chatgpt_prompts = chat_root().join("cache_model").join("chatgpt_prompts.json");
 
-        if !utils::exists(&model) {
+        if !exists(&model) {
             fs::write(
                 &model,
                 serde_json::json!({
